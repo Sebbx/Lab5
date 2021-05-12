@@ -23,8 +23,6 @@ public class Pong1<setCycleCount> extends Application{
     private  static  final double ARENAX2 = ARENAX1 + ARENAWIDHT;
     private  static  final double ARENAY2 = ARENAY1 + ARENAHEIGHT;
     private  static  final double R = 10;
-    private double x = ARENAX1+ARENAWIDHT/2;
-
 
     public void start (Stage stage)
     {
@@ -49,13 +47,25 @@ public class Pong1<setCycleCount> extends Application{
 
     }
 
+    private double x = ARENAX1+ARENAWIDHT/2;
+    private double y = ARENAY1+ARENAHEIGHT/2;
+
+    private double vx = 5;
+    private double vy = 2;
+
     private void run(GraphicsContext gc)
     {
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDHT, ARENAHEIGHT);
 
+        if ((x <= ARENAX1) || ((x >= ARENAX2))) vx = -vx;
+        if ((y <= ARENAY1) || ((y >= ARENAY2))) vy = -vy;
+
+        x += vx;
+        y += vy;
+
         gc.setFill(Color.WHITESMOKE);
-        gc.fillOval(x += 5, ARENAY1 + ARENAHEIGHT/2,2*R, 2*R);
+        gc.fillOval(x, y, 2*R, 2*R);
     }
 
 }
