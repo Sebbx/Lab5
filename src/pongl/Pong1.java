@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 
 public class Pong1<setCycleCount> extends Application{
     private  static  final double WIDTH = 800;
@@ -58,15 +60,24 @@ public class Pong1<setCycleCount> extends Application{
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDHT, ARENAHEIGHT);
 
-        if ((x <= ARENAX1) || ((x >= ARENAX2 - 20))) vx = -vx;
-        if ((y <= ARENAY1) || ((y >= ARENAY2 - 20))) vy = -vy;
+        if ((x - R <= ARENAX1) || ((x + R >= ARENAX2))) vx = -vx;
+        if ((y - R <= ARENAY1) || ((y + R >= ARENAY2))) vy = -vy;
 
         x += vx;
         y += vy;
 
         gc.setFill(Color.WHITESMOKE);
-        gc.fillOval(x, y, 2*R, 2*R);
+        gc.fillOval(x-R, y-R, 2*R,2*R);
     }
+
+    private void initKula(){
+        Random lott = new Random ();
+        x = lott.nextDouble() * ARENAWIDHT+ARENAX1;
+        y = lott.nextDouble() * ARENAHEIGHT+ARENAY1;
+        vx = 5+lott.nextDouble() * 20;
+        vy = 5+lott.nextDouble() * 20;
+    }
+
 
 }
 
