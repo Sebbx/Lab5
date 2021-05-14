@@ -30,7 +30,7 @@ public class Pong1<setCycleCount> extends Application{
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Timeline t = new Timeline(new KeyFrame(Duration.millis(100), e -> run(gc)));
+        Timeline t = new Timeline(new KeyFrame(Duration.millis(15), e -> run(gc)));
         t.setCycleCount(Timeline.INDEFINITE);
 
         stage.setTitle("Kulki!");
@@ -58,8 +58,8 @@ public class Pong1<setCycleCount> extends Application{
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDHT, ARENAHEIGHT);
 
-        if ((x <= ARENAX1) || ((x >= ARENAX2))) vx = -vx;
-        if ((y <= ARENAY1) || ((y >= ARENAY2))) vy = -vy;
+        if ((x <= ARENAX1) || ((x >= ARENAX2 - 20))) vx = -vx;
+        if ((y <= ARENAY1) || ((y >= ARENAY2 - 20))) vy = -vy;
 
         x += vx;
         y += vy;
