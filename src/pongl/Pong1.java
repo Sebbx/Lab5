@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import jdk.jshell.Snippet;
 
 import java.util.Random;
 
@@ -49,10 +50,7 @@ public class Pong1<setCycleCount> extends Application{
 //    private double vy = 2;
 
     private static final int LICZBAKULEK = 10;
-    private double[] x = new double[LICZBAKULEK];
-    private double[] y = new double[LICZBAKULEK];
-    private double[] vx = new double[LICZBAKULEK];
-    private double[] vy = new double[LICZBAKULEK];
+    private Kulka[] kulki = new Kulka[LICZBAKULEK];
 
     private void run(GraphicsContext gc)
     {
@@ -61,28 +59,21 @@ public class Pong1<setCycleCount> extends Application{
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDHT, ARENAHEIGHT);
 
         for (int i =0; i< LICZBAKULEK; i++) {
-            if ((x[i] - R <= ARENAX1) || ((x[i] + R >= ARENAX2))) vx[i] = -vx[i];
-            if ((y[i] - R <= ARENAY1) || ((y[i] + R >= ARENAY2))) vy[i] = -vy[i];
-        }
-
-        for (int i =0; i< LICZBAKULEK; i++) {
-            x[i] += vx[i];
-            y[i] += vy[i];
-        }
-
-        for (int i =0; i< LICZBAKULEK; i++) {
-            gc.setFill(Color.WHITESMOKE);
-            gc.fillOval(x[i] - R, y[i] - R, 2 * R, 2 * R);
+            kulki[i].checkBoundaryCollision(ARENAX1, ARENAY1, ARENAX2, ARENAY2);
+            kulki[i].update();
+            kulki[i].draw(gc);
         }
     }
 
     private void initKula(){
         Random lott = new Random ();
         for (int i =0; i< LICZBAKULEK; i++) {
-            x[i] = lott.nextDouble() * ARENAWIDHT + ARENAX1;
-            y[i] = lott.nextDouble() * ARENAHEIGHT + ARENAY1;
-            vx[i] = 5 + lott.nextDouble() * 20;
-            vy[i] = 5 + lott.nextDouble() * 20;
+            kulki[i] = new Kulka(
+                    lott.nextDouble()*ARENAWIDHT+ARENAX1,
+                    lott.nextDouble()*ARENAHEIGHT+ARENAY1,
+                    5+lott.nextDouble()*20,
+                    5+ lott.nextDouble()*20);
+
         }
     }
 
