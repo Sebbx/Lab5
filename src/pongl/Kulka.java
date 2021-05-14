@@ -1,5 +1,6 @@
 package pongl;
 
+import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -11,12 +12,23 @@ public class Kulka {
     public  double xPos;
     public  double yPos;
 
-    Kulka(double xPos, double yPos, double xSpeed, double ySpeed)
+    private Color color;
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    Kulka(double xPos, double yPos, double xSpeed, double ySpeed, Color color)
     {
         this.xPos = xPos;
         this.yPos = yPos;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.color = color;
     }
 
     public void checkBoundaryCollision(double xLeft, double yTop, double xRight, double yBottom){
@@ -29,7 +41,7 @@ public class Kulka {
     }
 
     public void draw(GraphicsContext gc){
-        gc.setFill(Color.WHITESMOKE);
+        gc.setFill(color);
         gc.fillOval(xPos - R, yPos - R, 2 * R, 2*R);
     }
 

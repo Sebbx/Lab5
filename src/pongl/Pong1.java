@@ -29,7 +29,7 @@ public class Pong1<setCycleCount> extends Application{
 
     public void start (Stage stage)
     {
-
+        initKula();
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -54,7 +54,6 @@ public class Pong1<setCycleCount> extends Application{
 
     private void run(GraphicsContext gc)
     {
-        initKula();
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDHT, ARENAHEIGHT);
 
@@ -72,7 +71,8 @@ public class Pong1<setCycleCount> extends Application{
                     lott.nextDouble()*ARENAWIDHT+ARENAX1,
                     lott.nextDouble()*ARENAHEIGHT+ARENAY1,
                     5+lott.nextDouble()*20,
-                    5+ lott.nextDouble()*20);
+                    5+ lott.nextDouble()*20,
+            Color.WHITESMOKE);
 
         }
     }
